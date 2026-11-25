@@ -1,0 +1,12 @@
+# Insert the knowledge-vault plugin: a kb_* tool family that distills discussed
+# technical points into a plain Markdown directory (front-matter + auto index),
+# plus a left-sidebar browser panel (sidebar.panellist + main, same id).
+#
+# The loader row specifier MUST equal the package.json `name`
+# (`dsh-knowledge-vault`) — the client-modules scan matches the nearest manifest
+# name against the Loader specifier, and the boot row id is the package name.
+# An alias here makes the scan classify the entry as "not a client row": the
+# host tools keep working but the sidebar entry silently disappears.
+- insert:
+    - id: knowledge-vault
+      name: "dsh-knowledge-vault"

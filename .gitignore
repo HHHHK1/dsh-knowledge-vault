@@ -1,0 +1,28 @@
+# dependencies
+node_modules/
+.pnpm-store/
+
+# build / pack output
+*.tgz
+dist/
+.pack/
+
+# logs and scratch
+*.log
+npm-debug.log*
+.npmrc.local
+.env
+.env.local
+
+# test scratch (smoke.mjs uses a temp dir under the OS temp root, nothing here)
+test/tmp/
+
+# editors / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# DSH runtime state (never part of the package)
+settings.json

@@ -1,0 +1,79 @@
+{
+  "name": "dsh-knowledge-vault",
+  "version": "0.1.0",
+  "description": "Distill what you discuss into a personal Markdown knowledge base: one kb_write call per technical point, one Markdown file per point, plus a read-only browser panel in the left sidebar. No database — just a folder you own, ready for Git or Obsidian.",
+  "type": "module",
+  "main": "./lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": "./lib/client.js",
+    "./dsh-plugin.json": "./dsh-plugin.json",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib/",
+    "cordis.patch.yml",
+    "dsh-plugin.json"
+  ],
+  "keywords": [
+    "deepseek-harness",
+    "dsh",
+    "dsh-plugin",
+    "knowledge-base",
+    "notes",
+    "markdown",
+    "obsidian",
+    "vault",
+    "second-brain"
+  ],
+  "author": {
+    "name": "时迟",
+    "url": "https://github.com/HHHHK1"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/HHHHK1/dsh-knowledge-vault.git"
+  },
+  "homepage": "https://github.com/HHHHK1/dsh-knowledge-vault#readme",
+  "bugs": {
+    "url": "https://github.com/HHHHK1/dsh-knowledge-vault/issues"
+  },
+  "engines": {
+    "node": ">=22",
+    "dsh": ">=0.2.1-rc.1"
+  },
+  "dsh": {
+    "engines": {
+      "dsh": ">=0.2.1-rc.1"
+    },
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-slots"
+      ]
+    }
+  },
+  "peerDependencies": {
+    "@deepseek-ai/dsh-tools": ">=0.2.1-rc.1",
+    "@deepseek-ai/dsh-host-webserver": ">=0.2.1-rc.1",
+    "react": "^18.2.0"
+  },
+  "peerDependenciesMeta": {
+    "@deepseek-ai/dsh-tools": {
+      "optional": true
+    },
+    "@deepseek-ai/dsh-host-webserver": {
+      "optional": true
+    },
+    "react": {
+      "optional": true
+    }
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

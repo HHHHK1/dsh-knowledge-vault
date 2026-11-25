@@ -1,7 +1,7 @@
 {
   "name": "dsh-knowledge-vault",
-  "version": "0.1.0",
-  "description": "Distill what you discuss into a personal Markdown knowledge base: one kb_write call per technical point, one Markdown file per point, plus a read-only browser panel in the left sidebar. No database — just a folder you own, ready for Git or Obsidian.",
+  "version": "0.3.0",
+  "description": "Personal Markdown knowledge base for DeepSeek Harness: distill a discussion into one note per technical point, then browse, search, pin, archive and drag-to-reorder it from the left sidebar.",
   "type": "module",
   "main": "./lib/index.js",
   "exports": {

@@ -125,11 +125,11 @@ issue 里填：
 
 ```yaml
 url: https://github.com/<owner>/dsh-knowledge-vault
-name: dsh-knowledge-vault
-category: knowledge
+name: <owner>/dsh-knowledge-vault      # 链接文字，是 owner/repo，不是包名
+category: memory                        # 只能取这些值之一：agi ui usage theme model identity session memory tools wsl browser vision voice docs skill workflow git notify dev security remote market fun
 description:
-  en: "Distill discussed technical points into a plain Markdown knowledge base, with a read-only browser panel in the left sidebar."
-  zh: "把对话里讨论出来的技术点手动归档成你自己的 Markdown 知识库，左侧边栏只读浏览与搜索。"
+  en: "Distill discussed technical points into a plain Markdown knowledge base, with a browser panel in the left sidebar for search, pinning, archiving and drag-to-reorder."
+  zh: "把对话里讨论出来的技术点手动归档成你自己的 Markdown 知识库，左侧边栏可搜索、置顶、收纳与拖拽排序。"
 icon: https://raw.githubusercontent.com/<owner>/dsh-knowledge-vault/main/assets/icon-180.png
 ```
 
@@ -150,4 +150,4 @@ icon: https://raw.githubusercontent.com/<owner>/dsh-knowledge-vault/main/assets/
 dsh plugin --profile desktop add dsh-knowledge-vault
 ```
 
-写个 release note（GitHub Releases）说明四个工具和「为什么是手动触发」，然后就可以把安装命令贴给同事了。
+写个 release note（GitHub Releases）说明五个工具与面板能力、以及「为什么是手动触发」，然后就可以把安装命令贴给同事了。

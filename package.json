@@ -1,7 +1,7 @@
 {
   "name": "dsh-knowledge-vault",
-  "version": "0.3.0",
-  "description": "Personal Markdown knowledge base for DeepSeek Harness: distill a discussion into one note per technical point, then browse, search, pin, archive and drag-to-reorder it from the left sidebar.",
+  "version": "0.3.1",
+  "description": "把和 DeepSeek Harness 的讨论归纳成一条条 Markdown 知识笔记：一个技术点一篇，可置顶、收进收纳夹、拖拽排序。",
   "type": "module",
   "main": "./lib/index.js",
   "exports": {

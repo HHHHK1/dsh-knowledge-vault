@@ -115,10 +115,22 @@ source_session: "session-..."
 
 这个文件是你的，跟着知识与目录一起 `git commit` 就行；删掉它只会丢排序偏好，不会丢任何笔记。
 
+## 安全：不跟随符号链接
+
+知识库目录会跟着 `git clone` 或别人给你的压缩包一起流动，所以它可能已经被塞进一个指向库外的链接。路径前缀检查挡不住这种链接（`外链/secret.md` 里根本没有 `..`），因此每一次读写都会再做一次**真实路径**校验：
+
+- 解析目标之前先 `realpath` 它就近的已存在上级，结果必须仍在库根之内，否则抛 `path escapes the knowledge root through a symlink`
+- 列表、搜索、体检都只用 `lstat`：符号链接（文件和目录）直接跳过，不进入
+- A file symlink is skipped just like a directory one — `kb_read` 和 `kb_write` 都会在碰盘之前拒绝
+- `/kb/api/read` 遇到越界链接返回 **403 `path-escape`**，`/kb/api/tree` 不列出这些条目
+- 新增测试 `test/symlink.mjs`：造一个库内链接指向库外目录，断言列表看不到、读不到、写不进、HTTP 两条门都挡住
+
+Windows 上创建文件符号链接需要开发者模式；测试用目录 junction 兜底，所以没有特权也能跑。
+
 ## 开发与调试
 
 ```powershell
-# 宿主半的冒烟测试：用假 ctx 驱动 4 个工具，不需要重启 DSH
+# 宿主半的冒烟测试：用假 ctx 驱动 5 个工具，不需要重启 DSH
 node test/smoke.mjs
 
 # /kb/api/ui 的路由级测试：写入、部分合并、脏数据清洗、坏文件回退、fence
@@ -129,6 +141,9 @@ node test/render.mjs
 
 # kb_lint 的规则测试：一个故意写坏的库必须全部命中，一个干净的库必须静默
 node test/lint.mjs
+
+# 符号链接越界测试：库内链接指向库外，列表/读取/写入/HTTP 都必须拒绝
+node test/symlink.mjs
 
 # 打包内容自检（tarball 只该有 lib/ + cordis.patch.yml + dsh-plugin.json + README + LICENSE）
 pnpm pack
@@ -154,6 +169,7 @@ dsh-knowledge-vault/
 ├── test/ui-state.mjs     # /kb/api/ui 的路由级测试（合并、清洗、fence）
 ├── test/render.mjs       # 面板渲染测试（假 react hook + 假 fetch）
 ├── test/lint.mjs         # kb_lint 的规则测试（坏的必须命中，干净的必须静默）
+├── test/symlink.mjs      # 符号链接越界测试（列表/读取/写入/HTTP 全拒）
 ├── test/verify-pack.mjs  # 把 tarball 解开再跑一遍两个半（验证发布产物）
 └── PUBLISHING.md         # 发布 runbook（npm / dshopen / awesome 市场）
 ```

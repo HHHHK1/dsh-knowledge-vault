@@ -223,6 +223,22 @@ await settle();
 const groupCall = calls.slice(beforeGroup).find((call) => call.method === "POST");
 check("collapsing a group stores its flag", Boolean(groupCall) && groupCall.body.groups["cat:数据库"] === true);
 
+// Alt+↑/↓ is the keyboard path to the same order the mouse produces.
+const beforeNudge = calls.length;
+rowFor("覆盖索引").props.onNudge(rowFor("覆盖索引").props.entry, 1);
+await settle();
+const nudgeCall = calls.slice(beforeNudge).find((call) => call.method === "POST" && call.url.includes("kb/api/ui"));
+check("keyboard nudge sends one POST", Boolean(nudgeCall));
+check(
+  "keyboard nudge swaps within the group",
+  Boolean(nudgeCall) &&
+    JSON.stringify(nudgeCall.body.order["cat:数据库"]) === JSON.stringify(["数据库/B-tree 索引为什么快.md", "数据库/覆盖索引.md"]),
+);
+
+// The row meta line turns a raw ISO stamp into something a human reads.
+check("rows show a relative timestamp", flat.includes("天前") || flat.includes("昨天"));
+check("rows show their tags", flat.includes("#postgres"));
+
 if (failures.length > 0) {
   console.error("rendered text:", flat);
   console.error("FAILURES:", failures.join(" | "));

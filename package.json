@@ -1,7 +1,7 @@
 {
   "name": "dsh-knowledge-vault",
-  "version": "0.3.1",
-  "description": "把和 DeepSeek Harness 的讨论归纳成一条条 Markdown 知识笔记：一个技术点一篇，可置顶、收进收纳夹、拖拽排序。",
+  "version": "0.4.0",
+  "description": "把和 DeepSeek Harness 的讨论归纳成一条条 Markdown 知识笔记：一个技术点一篇，可置顶、收纳、拖拽或键盘排序、按标签筛选、按最近更新查看。",
   "type": "module",
   "main": "./lib/index.js",
   "exports": {

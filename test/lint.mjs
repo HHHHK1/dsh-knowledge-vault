@@ -88,6 +88,8 @@ const bad = [
   ["工具", "标题写死包名 dsh-foo-bar 的条目.md", { created: "2026-11-25T11:00:00.000Z", tags: ["github"] }],
   ["运维", "跨分类重名.md", { created: "2026-11-25T12:00:00.000Z", tags: ["github"] }],
   ["数据库", "跨分类重名.md", { created: "2026-11-25T13:00:00.000Z", tags: ["github"] }],
+  ["性能", "B树 索引为什么快.md", { created: "2026-11-25T14:00:00.000Z", tags: ["index"] }],
+  ["性能", "B 树索引为什么快.md", { created: "2026-11-25T14:30:00.000Z", tags: ["index"] }],
 ];
 for (const [category, file, fields] of bad) {
   await mkdir(join(badRoot, category), { recursive: true });
@@ -112,6 +114,7 @@ check("duplicate title is reported", badOut.includes("标题重名"));
 check("shared created stamp is reported", badOut.includes("共用同一个 created 时间"));
 check("package name in a title is reported", badOut.includes("写死了包名 dsh-foo-bar"));
 check("over-broad tag is reported", badOut.includes("起不到筛选作用"));
+check("near-duplicate title is reported", badOut.includes("近似重名"));
 
 const toolOut = await lintBad({ category: "工具" });
 console.log(toolOut);

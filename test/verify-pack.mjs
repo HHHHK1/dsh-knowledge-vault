@@ -92,8 +92,8 @@ const ctx = {
 };
 host.apply(ctx, { root: join(workDir, "kb") });
 
-check("host registers 5 tools", tools.size === 5);
-for (const name of ["kb_write", "kb_list", "kb_read", "kb_search", "kb_lint"]) {
+check("host registers 6 tools", tools.size === 6);
+for (const name of ["kb_write", "kb_list", "kb_read", "kb_search", "kb_lint", "kb_delete"]) {
   check(`host registers ${name}`, tools.has(name));
 }
 
